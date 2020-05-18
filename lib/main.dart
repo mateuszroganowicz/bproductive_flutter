@@ -5,11 +5,18 @@ import './Timer.dart';
 import './Music.dart';
 import './ToDoList.dart';
 import './About.dart';
+import './Stats.dart';
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  static const main_color = Color(0xFFF7DB4F);
+  static const main_color_2 = Color(0xFFFFD300);
+  static const main_color_accent = Color(0xFFefc90b);
+  static const secondary_color = Color(0xFF2F9599);
+  static const secondary_color_2 = Color(0xFF2CB2B7);
+  static const accent_color = Color(0xFFEC2049);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -25,8 +32,8 @@ class HomePage extends State<MyApp> {
     MoodPage(),
     MusicPage(),
     ToDoListPage(),
-    About()
-
+    About(),
+    Stats()
   ];
 
   void _onItemTapped(int index) {
@@ -42,6 +49,7 @@ class HomePage extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: Text("BProductive"),
+          backgroundColor: MyApp.main_color,
         ),
         body: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
@@ -50,6 +58,7 @@ class HomePage extends State<MyApp> {
           type: BottomNavigationBarType.fixed,
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
+            backgroundColor: MyApp.main_color_2,
             items: [
               BottomNavigationBarItem(
                   icon: Icon(Icons.home), title: Text("Home")
@@ -65,6 +74,9 @@ class HomePage extends State<MyApp> {
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.info), title: Text("About")
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.assessment), title: Text("Stats")
               ),
             ]),
       ),
