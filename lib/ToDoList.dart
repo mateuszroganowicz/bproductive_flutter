@@ -9,90 +9,88 @@ class ToDoListPage extends StatelessWidget{
 
     return Scaffold
     (
-      body: Center
-      (
-        child: ListView
-          (
+      body: Center(
+
+        child: ListView(
           padding: const EdgeInsets.all(25),
-          children: <Widget>
-          [
-            Container
-            (
+          children: <Widget>[
+
+            Container(
               height: 50,
-              color: MyApp.secondary_color_2,
-              child: const Center
-              (
-                child: Text
-                  (
-                  'Task1',
-                  style: TextStyle
-                    (
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+              color: Colors.green,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Text(
+                      'Task1',
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                  )
+                    Text(
+                      'Priority: 1',
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ]
+              )
               ),
-            ),
-            Container
-              (
+            Container(
               height: 50,
-              color: MyApp.secondary_color,
-              child: const Center
-                (
-                  child: Text
-                    (
-                    'Task2',
-                    style: TextStyle
-                      (
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              color: Colors.orange,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Text(
+                      'Task2',
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                  )
+                    Text(
+                      'Priority: 2',
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ]
+              )
               ),
-            ),
-            Container
-              (
+            Container(
               height: 50,
-              color: MyApp.secondary_color_2,
-              child: const Center
-                (
-                  child: Text
-                    (
-                    'Task3',
-                    style: TextStyle
-                      (
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              color: Colors.red,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Text(
+                      'Task3',
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                  )
+                    Text(
+                      'Priority: 3',
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ]
+              )
               ),
-            ),
-            Container
-              (
+            Container(
               height: 50,
-              color: MyApp.secondary_color,
-              child: const Center
-                (
-                  child: Text
-                    (
-                    'Task4',
-                    style: TextStyle
-                      (
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              color: Colors.green,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Text(
+                      'Task4',
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                  )
+                    Text(
+                      'Priority: 1',
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ]
+              )
               ),
-            ),
+
           ],
         )
       ),
 
-      floatingActionButton: FloatingActionButton
-        (
-          onPressed: () {},
-        child: Text
-          (
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Text(
             "+",
             style: TextStyle(color: MyApp.secondary_color, fontSize: 25),
           ),

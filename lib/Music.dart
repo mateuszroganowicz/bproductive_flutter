@@ -12,79 +12,59 @@ class MusicPage extends StatelessWidget{
       body: Center
         (
           child: ListView(
-            padding: const EdgeInsets.only(top: 25),
-            children: <Widget>
-            [
-              Container
-                (
+            children: <Widget>[
+              Container(
                 height: 50,
                 color: MyApp.secondary_color_2,
-                child: const Center
-                  (
-                    child: Text
-                      (
+                child: const Center(
+                    child: Text(
                       'Song1',
                       style: TextStyle
-                        (
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                        (fontWeight: FontWeight.bold, color: Colors.white),
                     )
                 ),
               ),
-              Container
-                (
+              Container(
                 height: 50,
                 color: MyApp.secondary_color,
-                child: const Center
-                  (
-                    child: Text
-                      (
+                child: const Center(
+                    child: Text(
                       'Song2',
-                      style: TextStyle
-                        (
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                     )
                 ),
               ),
-              Container
-                (
+              Container(
                 height: 50,
                 color: MyApp.secondary_color_2,
-                child: const Center
-                  (
-                    child: Text
-                      (
+                child: const Center(
+                    child: Text(
                       'Song3',
-                      style: TextStyle
-                        (
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                     )
                 ),
               ),
-              Container
-                (
+              Container(
                 height: 50,
                 color: MyApp.secondary_color,
-                child: const Center
-                  (
-                    child: Text
-                      (
+                child: const Center(
+                    child: Text(
                       'Song4',
-                      style: TextStyle
-                        (
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                     )
                 ),
               ),
             ],
           )
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Text(
+          "Play",
+          style: TextStyle(color: MyApp.secondary_color),
+        ),
+        backgroundColor: MyApp.main_color,
       ),
     );
   }
