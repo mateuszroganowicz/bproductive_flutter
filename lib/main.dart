@@ -34,7 +34,7 @@ class HomePage extends State<MyApp> {
     MusicPage(),
     ToDoListPage(),
     About(),
-    Stats()
+    Stats(),
   ];
 
   void _onItemTapped(int index) {
@@ -62,7 +62,7 @@ class HomePage extends State<MyApp> {
             backgroundColor: MyApp.main_color_2,
             items: [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.home), title: Text("Home")
+                  icon: Icon(Icons.access_time), title: Text("Timer")
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.mood), title: Text("Mood")

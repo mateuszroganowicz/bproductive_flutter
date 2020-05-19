@@ -20,7 +20,7 @@ class Stats extends StatelessWidget{
                 width: 340.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
-                  color: MyApp.secondary_color,
+                  color: MyApp.accent_color,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -50,7 +50,7 @@ class Stats extends StatelessWidget{
                 width: 160.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
-                  color: MyApp.secondary_color,
+                  color: MyApp.accent_color,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -74,7 +74,7 @@ class Stats extends StatelessWidget{
                 width: 160.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
-                  color: MyApp.secondary_color,
+                  color: MyApp.accent_color,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -105,7 +105,7 @@ class Stats extends StatelessWidget{
                 width: 160.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
-                  color: MyApp.secondary_color,
+                  color: MyApp.accent_color,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -129,7 +129,7 @@ class Stats extends StatelessWidget{
                 width: 160.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
-                  color: MyApp.secondary_color,
+                  color: MyApp.accent_color,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
