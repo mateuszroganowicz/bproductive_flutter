@@ -1,3 +1,4 @@
+import 'package:bproductiveflutter/main.dart';
 import 'package:flutter/material.dart';
 
 class MoodPage extends StatelessWidget{
@@ -12,11 +13,14 @@ class MoodPage extends StatelessWidget{
             children: <Widget>[
               Container(
                 margin: EdgeInsets.only(top: 50),
+                padding: EdgeInsets.all(10),
                 child: Center(
                   child: Text(
                     "What is your mood today?",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: MyApp.secondary_color
                     ),
                   ),
                 ),

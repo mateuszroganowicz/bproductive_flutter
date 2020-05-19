@@ -12,13 +12,14 @@ class About extends StatelessWidget{
         (
         child: Container
           (
+          padding: EdgeInsets.all(25),
             child: Text
             (
               "Multiple lines of text informing about application and creators",
                 textAlign: TextAlign.center,
                 style: TextStyle
                 (
-                  fontSize: 15,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: MyApp.secondary_color,
                 ),

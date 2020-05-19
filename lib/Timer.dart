@@ -67,7 +67,7 @@ class TimerPage extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 150),
+                    margin: EdgeInsets.only(top: 100),
                     child: RaisedButton(
                       color: MyApp.main_color,
                       child: Icon(
@@ -77,7 +77,7 @@ class TimerPage extends StatelessWidget{
                     )
                   ),
                   Container(
-                      margin: EdgeInsets.only(top: 150),
+                      margin: EdgeInsets.only(top: 100),
                       child: RaisedButton(
                         color: MyApp.main_color,
                         child: Icon(

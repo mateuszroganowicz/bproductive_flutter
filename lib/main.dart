@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
   static const main_color_accent = Color(0xFFefc90b);
   static const secondary_color = Color(0xFF2F9599);
   static const secondary_color_2 = Color(0xFF2CB2B7);
+  static const secondary_color_3 = Color(0xFF2FCED4);
   static const accent_color = Color(0xFFEC2049);
   @override
   State<StatefulWidget> createState() {

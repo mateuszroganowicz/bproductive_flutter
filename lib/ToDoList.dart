@@ -9,15 +9,14 @@ class ToDoListPage extends StatelessWidget{
 
     return Scaffold
     (
-      body: Center(
-
+      body: Container(
         child: ListView(
           padding: const EdgeInsets.all(25),
           children: <Widget>[
 
             Container(
               height: 50,
-              color: Colors.green,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0),color: Colors.green,),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -33,8 +32,9 @@ class ToDoListPage extends StatelessWidget{
               )
               ),
             Container(
+                margin: EdgeInsets.only(top: 5),
               height: 50,
-              color: Colors.orange,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0),color: Colors.orange,),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -50,8 +50,9 @@ class ToDoListPage extends StatelessWidget{
               )
               ),
             Container(
+              margin: EdgeInsets.only(top: 5),
               height: 50,
-              color: Colors.red,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0),color: Colors.red,),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -67,8 +68,9 @@ class ToDoListPage extends StatelessWidget{
               )
               ),
             Container(
+              margin: EdgeInsets.only(top: 5),
               height: 50,
-              color: Colors.green,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0),color: Colors.green,),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
