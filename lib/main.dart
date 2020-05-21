@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import './Mood.dart';
-import './Timer.dart';
-import './Music.dart';
-import './ToDoList.dart';
-import './About.dart';
-import './Stats.dart';
+import 'ViewModels/Mood.dart';
+import 'ViewModels/Timer.dart';
+import 'ViewModels/Music.dart';
+import 'ViewModels/ToDoList.dart';
+import 'ViewModels/About.dart';
+import 'ViewModels/Stats.dart';
 void main() {
   runApp(MyApp());
 }
@@ -20,7 +20,6 @@ class MyApp extends StatefulWidget {
   static const accent_color = Color(0xFFEC2049);
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return HomePage();
   }
 }
@@ -45,7 +44,6 @@ class HomePage extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(

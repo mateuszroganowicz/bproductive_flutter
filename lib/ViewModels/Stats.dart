@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'main.dart';
+import '../main.dart';
 
 class Stats extends StatelessWidget{
   @override
@@ -16,8 +16,8 @@ class Stats extends StatelessWidget{
             children: <Widget>[
               Container(
                 margin: EdgeInsets.only(top: 10),
-                height: 180.0,
-                width: 340.0,
+                height: 200.0,
+                width: 390.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
                   color: MyApp.accent_color,
@@ -45,9 +45,9 @@ class Stats extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(top: 15),
-                height: 120.0,
-                width: 160.0,
+                margin: EdgeInsets.only(top: 25),
+                height: 140.0,
+                width: 180.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
                   color: MyApp.accent_color,
@@ -69,9 +69,9 @@ class Stats extends StatelessWidget{
               ),
 
               Container(
-                margin: EdgeInsets.only(top: 15),
-                height: 120.0,
-                width: 160.0,
+                margin: EdgeInsets.only(top: 25),
+                height: 140.0,
+                width: 180.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
                   color: MyApp.accent_color,
@@ -101,8 +101,8 @@ class Stats extends StatelessWidget{
             children: <Widget>[
               Container(
                 margin: EdgeInsets.only(top: 10),
-                height: 120.0,
-                width: 160.0,
+                height: 140.0,
+                width: 180.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
                   color: MyApp.accent_color,
@@ -117,7 +117,7 @@ class Stats extends StatelessWidget{
                 ),
                 child: Center(
                   child: Text(
-                    "Taken Sessions",
+                    "Most common mood",
                     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
@@ -125,8 +125,8 @@ class Stats extends StatelessWidget{
 
               Container(
                 margin: EdgeInsets.only(top: 10),
-                height: 120.0,
-                width: 160.0,
+                height: 140.0,
+                width: 180.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
                   color: MyApp.accent_color,
@@ -141,7 +141,7 @@ class Stats extends StatelessWidget{
                 ),
                 child: Center(
                   child: Text(
-                    "Tasks accomplished",
+                    "Hours spent learning",
                     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
