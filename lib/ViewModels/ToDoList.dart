@@ -12,6 +12,7 @@ class ToDoListPage extends StatefulWidget
 class _ToDoListPageState extends State<ToDoListPage>
 {
   List<Todo> todos = List();
+  var priorityItems = [1, 2, 3];
   String description = "";
   String localisation = "";
   int priority = 1;
@@ -82,12 +83,34 @@ class _ToDoListPageState extends State<ToDoListPage>
                         localisation = loc;
                       },
                     ),
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Priority: '),
-                      onChanged: (String prior){
-                        priority = int.parse(prior);
-                      },
-                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                            child: Text('Priority : '),
+                          ),
+                          DropdownButton<int>(
+                            value: priority,
+                            items: priorityItems.map((element) {
+                              return DropdownMenuItem<int>(
+                                value: element,
+                                child: Text(
+                                  element.toString(),
+                                  textAlign: TextAlign.center,),
+                              );
+                            }).toList(),
+                            onChanged: (int value) {
+                              setState(() {
+                                priority = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),

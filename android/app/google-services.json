@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "483167760803",
+    "firebase_url": "https://bproductive-6ace8.firebaseio.com",
+    "project_id": "bproductive-6ace8",
+    "storage_bucket": "bproductive-6ace8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483167760803:android:d949e708f56b521a002a16",
+        "android_client_info": {
+          "package_name": "com.example.bproductiveflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483167760803-o02r95h0ps957e5un5m3edc2ssn0lgjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk4gJAT62qKyEHt-tPrOQVbMF4OI2Mmn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483167760803-o02r95h0ps957e5un5m3edc2ssn0lgjg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
