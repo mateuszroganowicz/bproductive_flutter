@@ -6,11 +6,14 @@ import 'ViewModels/Music.dart';
 import 'ViewModels/ToDoList.dart';
 import 'ViewModels/About.dart';
 import 'ViewModels/Stats.dart';
+
+
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatefulWidget
+{
   static const main_color = Color(0xFFF7DB4F);
   static const main_color_2 = Color(0xFFFFD300);
   static const main_color_accent = Color(0xFFefc90b);
@@ -18,8 +21,10 @@ class MyApp extends StatefulWidget {
   static const secondary_color_2 = Color(0xFF2CB2B7);
   static const secondary_color_3 = Color(0xFF2FCED4);
   static const accent_color = Color(0xFFEC2049);
+
   @override
-  State<StatefulWidget> createState() {
+  State<StatefulWidget> createState()
+  {
     return HomePage();
   }
 }
@@ -45,6 +50,7 @@ class HomePage extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text("BProductive"),
