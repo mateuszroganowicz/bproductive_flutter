@@ -52,6 +52,11 @@ flutter:
     - assets/015-shock.png
     - assets/038-angry.png
     - assets/042-cool.png
+    - assets/next.png
+    - assets/previous.png
+    - assets/play.png
+    - assets/pause.png
+    - assets/stop.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
