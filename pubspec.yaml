@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_audio_query: "^0.3.4+1"
   assets_audio_player: ^1.6.3
+  cloud_firestore: ^0.13.6
 
 
 

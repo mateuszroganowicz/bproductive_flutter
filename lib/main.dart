@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'ViewModels/Mood.dart';
@@ -6,6 +7,7 @@ import 'ViewModels/Music.dart';
 import 'ViewModels/ToDoList.dart';
 import 'ViewModels/About.dart';
 import 'ViewModels/Stats.dart';
+import 'ViewModels/Map.dart';
 
 
 void main() {
@@ -54,6 +56,17 @@ class HomePage extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: Text("BProductive"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.map),
+              onPressed: ()
+              {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => Map(),
+                ));
+              }
+            )
+          ],
           backgroundColor: MyApp.main_color,
         ),
         body: Center(

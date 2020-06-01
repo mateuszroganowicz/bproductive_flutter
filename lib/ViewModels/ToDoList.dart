@@ -1,4 +1,5 @@
 import 'package:bproductiveflutter/Models/Todo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -11,57 +12,65 @@ class ToDoListPage extends StatefulWidget
 
 class _ToDoListPageState extends State<ToDoListPage>
 {
-  List<Todo> todos = List();
   var priorityItems = [1, 2, 3];
   String description = "";
   String localisation = "";
   int priority = 1;
+  int id = 0;
 
-  @override
-  void initState()
+  addTodo(Todo todo)
   {
-    super.initState();
+    DocumentReference documentReference = Firestore.instance.collection("Todos").document(description);
 
-    Todo todo1 = new Todo(text: 'Task1', priority: 1, localisation: 'Here');
-    Todo todo2 = new Todo(text: 'Task2', priority: 2, localisation: 'There');
-    Todo todo3 = new Todo(text: 'Task3', priority: 3, localisation: 'Far');
-    Todo todo4 = new Todo(text: 'Task4', priority: 1, localisation: 'Close');
+    //Map fields
+    Map<String, dynamic> todos = {
+      "description": todo.text,
+      "priority" : todo.priority,
+      "localisation": todo.localisation,
+    };
+    documentReference.setData(todos).whenComplete( () { print("$description created"); } );
+  }
 
-    todos.add(todo1);
-    todos.add(todo2);
-    todos.add(todo3);
-    todos.add(todo4);
+  deleteTodo(item)
+  {
+    DocumentReference documentReference = Firestore.instance.collection("Todos").document(item);
+    documentReference.delete().whenComplete( () {print("$item deleted");});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-          itemCount: todos.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Dismissible(
-              onDismissed: (direction) {
-                setState(() {
-                  todos.removeAt(index);
-                });
-              },
-              key: Key(todos[index].text),
-              child: Card(
-                elevation: 4,
-                shape: RoundedRectangleBorder(borderRadius:  BorderRadius.circular(10)),
-              child: ListTile(
-                title: Text('${todos[index].localisation} - ${todos[index].text} - ${todos[index].priority}'),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete, color: Colors.red,),
-                  onPressed: () {
-                    setState(() {
-                      todos.removeAt(index);
-                    });
-                  },
-                ),
-              ),),
-          );
-      }),
+      body: StreamBuilder(
+        stream: Firestore.instance.collection("Todos").snapshots(),
+        builder: (BuildContext  context, AsyncSnapshot snapshot)
+        {
+          if(snapshot.data == null)
+            {
+              return Center(child: CircularProgressIndicator());
+            }
+         if (snapshot.hasData) print('=== data ===: ${snapshot.data}');
+          return ListView.builder(
+              shrinkWrap: true,
+              itemCount: snapshot.data.documents.length,
+              itemBuilder: (context, int index) {
+                DocumentSnapshot documentSnapshot = snapshot.data.documents[index];
+                return Dismissible(
+                  onDismissed: (direction) { deleteTodo(documentSnapshot["description"]); },
+                  key: Key(index.toString()),
+                  child: Card(
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(borderRadius:  BorderRadius.circular(10)),
+                    child: ListTile(
+                      title: Text(documentSnapshot["description"] + ' - Priority: ' + documentSnapshot["priority"].toString()),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete, color: Colors.red,),
+                        onPressed: () { deleteTodo(documentSnapshot["description"]); },
+                      ),
+                    ),),
+                );
+              });
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(context: context, builder:
@@ -117,8 +126,9 @@ class _ToDoListPageState extends State<ToDoListPage>
               actions: <Widget>[
                 FlatButton(
                   onPressed: () {
-                    Todo temp = new Todo(text: description, priority: priority, localisation: localisation);
-                      setState( () {todos.add(temp);} );
+                    id++;
+                    Todo temp = new Todo(id, description, priority, localisation);
+                      addTodo(temp);
                       Navigator.of(context).pop();
                   },
                   child: Text('Add'),)
