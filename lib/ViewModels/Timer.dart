@@ -20,10 +20,12 @@ class _TimerPageState extends State<TimerPage>{
   int time = 15;
   String timeLeftText = "";
   bool stopTimer = false;
+  bool timeToBreak = true;
   int timeLeft;
-
-
+  int session = 0;
+  int breaks = 0;
   Timer _timer;
+
 
   void start(){
       setState(() {
@@ -32,7 +34,22 @@ class _TimerPageState extends State<TimerPage>{
       });
       _timer = Timer.periodic(Duration(seconds: 1), (timer){
         setState(() {
-          if(time < 1){
+          if(time < 1 && session < 4 && timeToBreak){
+            timeToBreak = false;
+            timeLeftText = "";
+            time = 7;
+            session++;
+            breaks++;
+            debugPrint(breaks.toString()+ "break Time");
+          }
+          else if(time < 1 && session < 4 && !timeToBreak){
+            timeToBreak = true;
+            time = 15;
+            debugPrint(session.toString()+ "study Time");
+          }
+          else if(time < 1 && session == 4){
+            session = 0;
+            breaks = 0;
             _timer.cancel();
             stopTimer = true;
             timeLeftText = "";
@@ -65,6 +82,8 @@ class _TimerPageState extends State<TimerPage>{
         started = false;
         time = 15;
         timeLeftText = "";
+        breaks = 0;
+        session = 0;
         debugPrint("Timerstopped");
       });
     }
@@ -88,19 +107,19 @@ class _TimerPageState extends State<TimerPage>{
                         children: <Widget>[
                           Container(
                             margin: const EdgeInsets.all(20),
-                            child: Icon(Icons.brightness_1, color: MyApp.accent_color,),
+                            child: session == 0 ? Icon(Icons.radio_button_unchecked, color: MyApp.accent_color,) : Icon(Icons.brightness_1, color: MyApp.accent_color,),
                           ),
                           Container(
                             margin: const EdgeInsets.all(20),
-                            child: Icon(Icons.brightness_1, color: MyApp.accent_color,),
+                            child: session < 2 ? Icon(Icons.radio_button_unchecked, color: MyApp.accent_color,) : Icon(Icons.brightness_1, color: MyApp.accent_color,),
                           ),
                           Container(
                             margin: const EdgeInsets.all(20),
-                            child: Icon(Icons.brightness_1, color: MyApp.accent_color,),
+                            child: session < 3 ? Icon(Icons.radio_button_unchecked, color: MyApp.accent_color,) : Icon(Icons.brightness_1, color: MyApp.accent_color,),
                           ),
                           Container(
                             margin: const EdgeInsets.all(20),
-                            child: Icon(Icons.brightness_1, color: MyApp.accent_color,),
+                            child: session < 4 ? Icon(Icons.radio_button_unchecked, color: MyApp.accent_color,) : Icon(Icons.brightness_1, color: MyApp.accent_color,),
                           )
 
                         ],
@@ -139,7 +158,6 @@ class _TimerPageState extends State<TimerPage>{
                       margin: EdgeInsets.only(top: 100),
                       child: FlatButton(
                         child: Image.asset(started ? 'assets/pause.png' : 'assets/play.png'),
-                        color: MyApp.main_color,
                         onPressed: started ? pause : start,
                     )
                   ),
