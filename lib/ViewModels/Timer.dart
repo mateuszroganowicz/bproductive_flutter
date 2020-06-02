@@ -1,9 +1,76 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
 
-class TimerPage extends StatelessWidget{
+class TimerPage extends StatefulWidget{
+  @override
+  _TimerPageState createState() {
+
+    return _TimerPageState();
+  }
+
+}
+
+class _TimerPageState extends State<TimerPage>{
+  int initTime;
+  bool started = false;
+  int time = 15;
+  String timeLeftText = "";
+  bool stopTimer = false;
+  int timeLeft;
+
+
+  Timer _timer;
+
+  void start(){
+      setState(() {
+        stopTimer = false;
+        started = true;
+      });
+      _timer = Timer.periodic(Duration(seconds: 1), (timer){
+        setState(() {
+          if(time < 1){
+            _timer.cancel();
+            stopTimer = true;
+            timeLeftText = "";
+            time = 15;
+            started = false;
+          }
+          else{
+            time = time - 1;
+          }
+          timeLeftText = time.toString();
+        });
+      });
+    }
+
+
+
+  void pause(){
+    setState(() {
+      started = false;
+      _timer.cancel();
+      debugPrint("pause" + time.toString());
+    });
+  }
+
+  void stop(){
+    if(started){
+      setState(() {
+        stopTimer = true;
+        _timer.cancel();
+        started = false;
+        time = 15;
+        timeLeftText = "";
+        debugPrint("Timerstopped");
+      });
+    }
+
+  }
+
   @override
   Widget build(BuildContext context)
   {
@@ -50,7 +117,7 @@ class TimerPage extends StatelessWidget{
                     margin: const EdgeInsets.only(top: 80),
                     child: Center(
                         child: Text(
-                          "00:00",
+                          timeLeftText,
                           style: TextStyle(
                           fontSize: 70,
                           fontWeight: FontWeight.bold,
@@ -67,23 +134,22 @@ class TimerPage extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 100),
-                    child: RaisedButton(
-                      color: MyApp.main_color,
-                      child: Icon(
-                        Icons.play_arrow,
-                        color:MyApp.secondary_color,
-                      ), onPressed: () {},
+                      height: 70,
+                      width: 70,
+                      margin: EdgeInsets.only(top: 100),
+                      child: FlatButton(
+                        child: Image.asset(started ? 'assets/pause.png' : 'assets/play.png'),
+                        color: MyApp.main_color,
+                        onPressed: started ? pause : start,
                     )
                   ),
                   Container(
+                      height: 70,
+                      width: 70,
                       margin: EdgeInsets.only(top: 100),
-                      child: RaisedButton(
-                        color: MyApp.main_color,
-                        child: Icon(
-                          Icons.stop,
-                          color:MyApp.secondary_color,
-                        ), onPressed: () {},
+                      child: FlatButton(
+                        child: Image.asset('assets/stop.png'),
+                        onPressed: stop,
                       )
                   )
                 ],
