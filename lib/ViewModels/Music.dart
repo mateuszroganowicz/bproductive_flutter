@@ -12,7 +12,8 @@ class MusicPage extends StatefulWidget {
   }
 }
 
-class _MusicPageState extends State<MusicPage> {
+class _MusicPageState extends State<MusicPage>
+{
   final FlutterAudioQuery audioQuery = FlutterAudioQuery();
   final assetsAudioPlayer = AssetsAudioPlayer();
   Duration currentTime = Duration();
@@ -21,12 +22,12 @@ class _MusicPageState extends State<MusicPage> {
   bool playing = false;
   List<SongInfo> _songs = [];
   String title = "";
+
   @override
   void initState() {
     super.initState();
     assetsAudioPlayer.stop();
     getSongs();
-
   }
 
   @override
@@ -42,9 +43,6 @@ class _MusicPageState extends State<MusicPage> {
       setState(() {
         _songs = songs;
       });
-
-
-
   }
 
   @override
@@ -74,17 +72,14 @@ class _MusicPageState extends State<MusicPage> {
                         currentTime = duration;
                       });
                     });
-
                     assetsAudioPlayer.current.listen((playingAudio) {
                       setState(() {
                         totalTime = playingAudio.audio.duration;
                       });
                     });
-
                      setState(() {
                        playing = true;
                      });
-
                   },
                 );
               }
@@ -160,14 +155,11 @@ class _MusicPageState extends State<MusicPage> {
                           setState(() {
                             title = _songs[position].title;
                             playing = true;
-
                           });
                         }
                       }
                   ),
-
                 ),
-
                 Container(
                   height: 70,
                   width: 70,
@@ -181,7 +173,6 @@ class _MusicPageState extends State<MusicPage> {
                         });
                       }
                   ),
-
                 ),
                 Container(
                   height: 50,
@@ -206,16 +197,12 @@ class _MusicPageState extends State<MusicPage> {
                         assetsAudioPlayer.play();
                         playing = true;
                         print(position);
-
                       }
                     },
                   ),
-
                 )
-
               ],
             ),
-
           ),
           Container(
             width: MediaQuery.of(context).size.width*0.8,
@@ -252,13 +239,8 @@ class _MusicPageState extends State<MusicPage> {
 
     );
   }
-
-
-
-
   void seekToSec(int second){
     Duration newDuration = Duration(seconds: second);
     assetsAudioPlayer.seek(newDuration);
-
   }
 }

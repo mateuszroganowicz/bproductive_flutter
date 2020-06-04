@@ -23,6 +23,9 @@ class MyApp extends StatefulWidget
   static const secondary_color_2 = Color(0xFF2CB2B7);
   static const secondary_color_3 = Color(0xFF2FCED4);
   static const accent_color = Color(0xFFEC2049);
+  static const taskPriority1_color = Color(0xFF00c05f);
+  static const taskPriority2_color = Color(0xFFffa500);
+  static const taskPriority3_color = Color(0xFFEC2049);
 
   @override
   State<StatefulWidget> createState()

@@ -2,23 +2,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Todo
 {
-  int id;
   String text;
   int priority;
   String localisation;
 
-  Todo(int id, String txt, int prior, String loc)
+  Todo(String txt, int prior, String loc)
   {
-    this.id = id;
     this.text = txt;
     this.priority = prior;
     this.localisation = loc;
   }
 
-
-
-  deleteTodo()
+  addTodo()
   {
+    DocumentReference documentReference = Firestore.instance.collection("Todos").document(text);
 
+    //Map fields
+    Map<String, dynamic> todos = {
+      "description": text,
+      "priority" : priority,
+      "localisation": localisation,
+    };
+    documentReference.setData(todos).whenComplete( () { print("$text created"); } );
   }
 }

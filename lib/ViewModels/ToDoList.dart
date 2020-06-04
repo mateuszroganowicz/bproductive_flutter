@@ -18,24 +18,13 @@ class _ToDoListPageState extends State<ToDoListPage>
   int priority = 1;
   int id = 0;
 
-  addTodo(Todo todo)
-  {
-    DocumentReference documentReference = Firestore.instance.collection("Todos").document(description);
-
-    //Map fields
-    Map<String, dynamic> todos = {
-      "description": todo.text,
-      "priority" : todo.priority,
-      "localisation": todo.localisation,
-    };
-    documentReference.setData(todos).whenComplete( () { print("$description created"); } );
-  }
 
   deleteTodo(item)
   {
     DocumentReference documentReference = Firestore.instance.collection("Todos").document(item);
     documentReference.delete().whenComplete( () {print("$item deleted");});
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,17 +33,14 @@ class _ToDoListPageState extends State<ToDoListPage>
         stream: Firestore.instance.collection("Todos").snapshots(),
         builder: (BuildContext  context, AsyncSnapshot snapshot)
         {
-          if(snapshot.data == null)
-            {
-              return Center(child: CircularProgressIndicator());
-            }
-         if (snapshot.hasData) print('=== data ===: ${snapshot.data}');
+          if(snapshot.data == null) return Center(child: CircularProgressIndicator());
           return ListView.builder(
               shrinkWrap: true,
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, int index) {
                 DocumentSnapshot documentSnapshot = snapshot.data.documents[index];
                 return Dismissible(
+                  background: Container(decoration: BoxDecoration(color: MyApp.taskPriority3_color, borderRadius: BorderRadius.circular(10))),
                   onDismissed: (direction) { deleteTodo(documentSnapshot["description"]); },
                   key: Key(index.toString()),
                   child: Card(
@@ -127,8 +113,8 @@ class _ToDoListPageState extends State<ToDoListPage>
                 FlatButton(
                   onPressed: () {
                     id++;
-                    Todo temp = new Todo(id, description, priority, localisation);
-                      addTodo(temp);
+                    Todo temp = new Todo(description, priority, localisation);
+                      temp.addTodo();
                       Navigator.of(context).pop();
                   },
                   child: Text('Add'),)
