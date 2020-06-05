@@ -23,6 +23,7 @@ class MyApp extends StatefulWidget
   static const secondary_color_2 = Color(0xFF2CB2B7);
   static const secondary_color_3 = Color(0xFF2FCED4);
   static const accent_color = Color(0xFFEC2049);
+
   static const taskPriority1_color = Color(0xFF00c05f);
   static const taskPriority2_color = Color(0xFFffa500);
   static const taskPriority3_color = Color(0xFFEC2049);
@@ -55,21 +56,15 @@ class HomePage extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        routes:
+        {
+          '/map': (context) => Map(),
+          '/todo': (context) => ToDoListPage(),
+        },
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text("BProductive"),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.map),
-              onPressed: ()
-              {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => Map(),
-                ));
-              }
-            )
-          ],
           backgroundColor: MyApp.main_color,
         ),
         body: Center(
