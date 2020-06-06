@@ -19,7 +19,7 @@ class _TimerPageState extends State<TimerPage>{
   int time = 15;
   int studyTime = 15;
   int breakTime = 7;
-  String timeLeftText = "";
+  String timeLeftText = "00:00";
   String txt = "";
   String txtTop = "Completed sessions:";
   bool stopTimer = false;
@@ -27,6 +27,8 @@ class _TimerPageState extends State<TimerPage>{
   int timeLeft;
   int session = 0;
   int breaks = 0;
+  int totalSessionsStats = 0;
+  int totalTimeStats = 0;
   Timer _timer;
 
 
@@ -42,20 +44,25 @@ class _TimerPageState extends State<TimerPage>{
             timeToBreak = false;
             timeLeftText = "";
             time = breakTime;
+            totalTimeStats += studyTime;
             session++;
             breaks++;
             debugPrint(breaks.toString()+ "break Time");
+            debugPrint(totalTimeStats.toString() + "total time");
             txt = "Take a short break!";
           }
           else if(time < 1 && session < 4 && !timeToBreak){
             timeToBreak = true;
             time = studyTime;
             debugPrint(session.toString()+ "study Time");
+
             txt = "Study hard!";
           }
           else if(time < 1 && session == 4){
             session = 0;
             breaks = 0;
+            timeToBreak = true;
+            totalSessionsStats++;
             _timer.cancel();
             stopTimer = true;
             timeLeftText = "";
