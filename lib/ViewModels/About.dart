@@ -7,24 +7,71 @@ class About extends StatelessWidget{
     // TODO: implement build
 
     return Scaffold(
-      body: Center
-        (
-        child: Container
-          (
-          padding: EdgeInsets.all(25),
-            child: Text
-            (
-              "Multiple lines of text informing about application and creators",
-                textAlign: TextAlign.center,
-                style: TextStyle
-                (
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: MyApp.secondary_color,
-                ),
+      body: Column(
+          children: <Widget>[
+            Row(
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 10, left: 10),
+                        child: Text(
+                          "BProductive ver: 0.1",
+                          style: TextStyle(
+                            fontSize: 35,
+                            color: Colors.black45,
+                          ),
+                        )
+                  )
+                ]
             ),
-          )
-      )
+
+            Row(
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(top: 10, left: 10),
+                  child: Text(
+                    "Developed by:\n Jakub Sztompka 100731 \n Mateusz Roganowicz 96947",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black45,
+                    ),
+                  ),
+                )
+              ],
+            ),
+
+            Row(
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(top: 30, left: 10),
+                  child: Text(
+                    "App was designed and implemented \n for ICM course at \n University of Aveiro (2019/2020)",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black45,
+                    ),
+                  ),
+                )
+              ],
+            ),
+
+            Row(
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(top: 230, left: 10),
+                  child: Text(
+                    "All icons were downloaded from \n https://www.flaticon.com/",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black45,
+                    ),
+                  ),
+                )
+              ],
+            )
+
+
+          ]
+    )
     );
   }
 }
