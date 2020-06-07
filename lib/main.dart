@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:bproductiveflutter/ViewModels/AddTaskDialog.dart';
 import 'package:flutter/material.dart';
 
 import 'ViewModels/Mood.dart';
@@ -59,7 +58,6 @@ class HomePage extends State<MyApp> {
         {
           '/map': (context) => Map(),
           '/todo': (context) => ToDoListPage(),
-          '/addTaskDialog': (context) => AddTaskDialog(),
         },
       debugShowCheckedModeBanner: false,
       home: Scaffold(
