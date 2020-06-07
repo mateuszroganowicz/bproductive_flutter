@@ -1,4 +1,5 @@
 import 'package:bproductiveflutter/Models/Todo.dart';
+import 'package:bproductiveflutter/ViewModels/AddTaskDialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'Map.dart';
@@ -19,19 +20,11 @@ class _ToDoListPageState extends State<ToDoListPage>
   int priority = 1;
   int id = 0;
 
-//  Color getTaskColor(color)
-//  {
-//    if (color == 1) return Colors.green;
-//    else if (color == 2) return Colors.orange;
-//    else return Colors.red;
-//  }
-
   deleteTodo(item)
   {
     DocumentReference documentReference = Firestore.instance.collection("Todos").document(item);
     documentReference.delete().whenComplete( () {print("$item deleted");});
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +51,6 @@ class _ToDoListPageState extends State<ToDoListPage>
                         child: ListTile(
                           title: Text(
                             documentSnapshot["description"] + ' - Priority: ' + documentSnapshot["priority"].toString(),
-                            //style: TextStyle(color: getTaskColor(priority)),
                           ),
                           trailing: IconButton(
                             icon: Icon(Icons.delete, color: Colors.red,),
@@ -76,63 +68,7 @@ class _ToDoListPageState extends State<ToDoListPage>
               onPressed: () {
                 showDialog(context: context, builder:
                 (BuildContext context){
-                  return AlertDialog(
-                    content: Container(
-                      height: 300,
-                      child: Column(
-                        children: <Widget>[
-                          TextField(
-                            decoration: InputDecoration(labelText: 'Task: '),
-                            onChanged: (String desc){
-                              description = desc;
-                            },
-                          ),
-                          TextField(
-                            decoration: InputDecoration(labelText: 'Location: '),
-                            onChanged: (String loc){
-                              localisation = loc;
-                            },
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                                  child: Text('Priority : '),
-                                ),
-                                DropdownButton<int>(
-                                  value: priority,
-                                  items: priorityItems.map((element) {
-                                    return DropdownMenuItem<int>(
-                                      value: element,
-                                      child: Text(
-                                        element.toString(),
-                                        textAlign: TextAlign.center,),
-                                    );
-                                  }).toList(),
-                                  onChanged: (int value) {
-                                      priority = value;
-                                  },
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    actions: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          id++;
-                          Todo temp = new Todo(description, priority, localisation);
-                            temp.addTodo();
-                            Navigator.of(context).pop();
-                        },
-                        child: Text('Add'),)
-                    ],
-                  );
+                  return AddTaskDialog();
                 });
               },
               child: Icon(Icons.add),
