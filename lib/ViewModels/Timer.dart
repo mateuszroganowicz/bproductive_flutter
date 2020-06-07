@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
 import '../main.dart';
 
@@ -30,6 +31,22 @@ class _TimerPageState extends State<TimerPage>{
   int totalSessionsStats = 0;
   int totalTimeStats = 0;
   Timer _timer;
+
+  final GlobalKey<AnimatedCircularChartState> _chartKey = new GlobalKey<AnimatedCircularChartState>();
+  final _chartSize = const Size(250.0, 250.0);
+  Color labelColor = Colors.blue;
+
+  List<CircularStackEntry> _generateChartData(int min, int sec){
+    Color dialColor = Colors.blue;
+    labelColor = dialColor;
+
+    List<CircularStackEntry> data = [
+      new CircularStackEntry(
+        [new CircularSegmentEntry(sec.toDouble(), dialColor)]
+      )
+    ];
+    return data;
+  }
 
 
   void start(){
@@ -128,10 +145,28 @@ class _TimerPageState extends State<TimerPage>{
   @override
   Widget build(BuildContext context)
   {
+    TextStyle _labelStyle = Theme
+      .of(context)
+      .textTheme
+      .title
+      .merge(new TextStyle(color: labelColor));
     return Scaffold
       (
         body: Column(
           children: <Widget>[
+            Container(
+              child: new AnimatedCircularChart(
+                key: _chartKey,
+                size: _chartSize,
+                initialChartData: _generateChartData(0,0),
+                chartType: CircularChartType.Radial,
+                edgeStyle: SegmentEdgeStyle.round,
+                percentageValues: true,
+                holeLabel: txt,
+                labelStyle: _labelStyle,
+
+              ),
+            ),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

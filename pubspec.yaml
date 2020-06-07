@@ -19,6 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_circular_chart:
 
   #Maps
   geolocation: ^1.1.2
