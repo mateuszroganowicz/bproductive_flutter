@@ -14,7 +14,7 @@ class About extends StatelessWidget{
                   Container(
                     margin: const EdgeInsets.only(top: 10, left: 10),
                         child: Text(
-                          "BProductive ver: 0.1",
+                          "BProductive ver: 0.2",
                           style: TextStyle(
                             fontSize: 35,
                             color: Colors.black45,
@@ -44,7 +44,7 @@ class About extends StatelessWidget{
                 Container(
                   margin: const EdgeInsets.only(top: 30, left: 10),
                   child: Text(
-                    "App was designed and implemented \n for ICM course at \n University of Aveiro (2019/2020)",
+                    "App was designed and implemented \nfor ICM course at \nUniversity of Aveiro (2019/2020)",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.black45,

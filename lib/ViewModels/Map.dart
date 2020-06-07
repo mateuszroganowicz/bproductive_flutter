@@ -1,6 +1,8 @@
+import 'package:bproductiveflutter/Models/Todo.dart';
+import 'package:bproductiveflutter/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 class Map extends StatefulWidget {
@@ -9,20 +11,18 @@ class Map extends StatefulWidget {
 }
 
 class _MapState extends State<Map> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FlutterMap(
-        options: MapOptions(
-          minZoom: 10,
+      body: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: LatLng(37.77483, -122.41942),
+          zoom: 12,
         ),
-        layers: [
-          TileLayerOptions(
-            urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            subdomains: ['a', 'b', 'c'],
-          )
-        ],
-      ),
+      )
     );
   }
 }

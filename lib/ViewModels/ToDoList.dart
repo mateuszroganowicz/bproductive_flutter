@@ -19,6 +19,12 @@ class _ToDoListPageState extends State<ToDoListPage>
   int priority = 1;
   int id = 0;
 
+//  Color getTaskColor(color)
+//  {
+//    if (color == 1) return Colors.green;
+//    else if (color == 2) return Colors.orange;
+//    else return Colors.red;
+//  }
 
   deleteTodo(item)
   {
@@ -50,7 +56,10 @@ class _ToDoListPageState extends State<ToDoListPage>
                         elevation: 4,
                         shape: RoundedRectangleBorder(borderRadius:  BorderRadius.circular(10)),
                         child: ListTile(
-                          title: Text(documentSnapshot["description"] + ' - Priority: ' + documentSnapshot["priority"].toString()),
+                          title: Text(
+                            documentSnapshot["description"] + ' - Priority: ' + documentSnapshot["priority"].toString(),
+                            //style: TextStyle(color: getTaskColor(priority)),
+                          ),
                           trailing: IconButton(
                             icon: Icon(Icons.delete, color: Colors.red,),
                             onPressed: () { deleteTodo(documentSnapshot["description"]); },
@@ -104,9 +113,7 @@ class _ToDoListPageState extends State<ToDoListPage>
                                     );
                                   }).toList(),
                                   onChanged: (int value) {
-                                    setState(() {
                                       priority = value;
-                                    });
                                   },
                                 ),
                               ],

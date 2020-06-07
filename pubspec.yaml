@@ -20,7 +20,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Use with the CupertinoIcons class for iOS style icons.
+  #Maps
+  geolocation: ^1.1.2
+  flutter_map:
+  google_maps_flutter: ^0.5.24+1
+
+  #Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
   #Music player
@@ -30,12 +35,12 @@ dependencies:
   #Firestore
   cloud_firestore: ^0.13.6
 
-  #Maps
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  google_maps_flutter:
-  flutter_map:
+
+
 
 
 # For information on the generic Dart part of this file, see the

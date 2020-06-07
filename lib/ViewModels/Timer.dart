@@ -19,7 +19,7 @@ class _TimerPageState extends State<TimerPage>{
   int time = 15;
   int studyTime = 15;
   int breakTime = 7;
-  String timeLeftText = "";
+  String timeLeftText = "00:00";
   String txt = "";
   String txtTop = "Completed sessions:";
   bool stopTimer = false;
