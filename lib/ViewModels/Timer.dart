@@ -16,12 +16,11 @@ class TimerPage extends StatefulWidget{
 class _TimerPageState extends State<TimerPage>{
   int initTime;
   bool started = false;
-  int time = 15;
-  int studyTime = 15;
-  int breakTime = 5;
+  int time = 15;  //seconds
+  int studyTime = 15; //seconds
+  int breakTime = 5; //seconds
   String timeLeftText = "00:00";
   String txt = "";
-  String txtTop = "Completed sessions:";
   bool stopTimer = false;
   bool timeToBreak = true;
   int timeLeft;
@@ -32,17 +31,13 @@ class _TimerPageState extends State<TimerPage>{
   Timer _timer;
 
   final GlobalKey<AnimatedCircularChartState> _chartKey = new GlobalKey<AnimatedCircularChartState>();
-  final _chartSize = const Size(150.0, 150.0);
-  Color labelColor = Colors.blue;
+  final _chartSize = const Size(250.0, 250.0);
 
   List<CircularStackEntry> _generateChartData(int sec){
-    Color dialColor = Colors.blue;
-    labelColor = dialColor;
-
     List<CircularStackEntry> data = [
       new CircularStackEntry(
         <CircularSegmentEntry>
-        [new CircularSegmentEntry(timeToBreak?(sec*(100/studyTime)).toDouble():(sec*(100/breakTime)).toDouble(), Colors.black)])
+        [new CircularSegmentEntry(timeToBreak?(sec*(100/studyTime)).toDouble():(sec*(100/breakTime)).toDouble(), MyApp.secondary_color)])
     ];
     return data;
   }
@@ -112,6 +107,7 @@ class _TimerPageState extends State<TimerPage>{
             //debugPrint(totalTimeStats.toString() + "total time");
             txt = "Take a short break!";
           }
+
           else if(time < 1 && session < 4 && !timeToBreak){
             timeToBreak = true;
             time = studyTime;
@@ -120,6 +116,7 @@ class _TimerPageState extends State<TimerPage>{
 
             txt = "Study hard!";
           }
+
           else if(time < 1 && session == 4){
             session = 0;
             breaks = 0;
@@ -131,6 +128,7 @@ class _TimerPageState extends State<TimerPage>{
             time = studyTime;
             started = false;
           }
+
           else{
             time = time - 1;
             List<CircularStackEntry> data = _generateChartData(time);
@@ -143,18 +141,15 @@ class _TimerPageState extends State<TimerPage>{
             if(m < 10 && s >= 10){
               timeLeftText = "0" + m.toString() + ":" + s.toString();
               List<CircularStackEntry> data = _generateChartData(time);
-
             }
             else if(s < 10 && m < 10){
               timeLeftText = "0" + m.toString() + ":0" + s.toString();
               List<CircularStackEntry> data = _generateChartData(time);
-
             }
             else{
               timeLeftText = m.toString() + ":" + s.toString();
               List<CircularStackEntry> data = _generateChartData(time);
             }
-
           }
           else if(time < 60 && time >= 10){
             timeLeftText = "00:" + time.toString();
@@ -168,8 +163,6 @@ class _TimerPageState extends State<TimerPage>{
 
     });
   }
-
-
 
   void pause(){
     setState(() {
@@ -198,46 +191,10 @@ class _TimerPageState extends State<TimerPage>{
   @override
   Widget build(BuildContext context)
   {
-    TextStyle _labelStyle = Theme
-      .of(context)
-      .textTheme
-      .title
-      .merge(new TextStyle(color: labelColor));
     return Scaffold
       (
         body: Column(
           children: <Widget>[
-            Container(
-              child: new AnimatedCircularChart(
-                key: _chartKey,
-                size: _chartSize,
-                initialChartData: _generateChartData(time),
-                chartType: CircularChartType.Radial,
-                //edgeStyle: SegmentEdgeStyle.round,
-                percentageValues: true,
-                holeLabel: timeLeftText ,
-                labelStyle: _labelStyle,
-
-              ),
-            ),
-            /*Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: Center(
-                        child: Text(
-                          txtTop,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: MyApp.secondary_color,
-                          ),
-                        )
-                    ),
-                  )
-                ]
-            ),*/
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -262,7 +219,6 @@ class _TimerPageState extends State<TimerPage>{
                         margin: const EdgeInsets.all(20),
                         child: session < 4 ? Icon(Icons.radio_button_unchecked, color: MyApp.accent_color,) : Icon(Icons.brightness_1, color: MyApp.accent_color,),
                       )
-
                     ],
                   ),
                 ),
@@ -284,29 +240,23 @@ class _TimerPageState extends State<TimerPage>{
                         ),
                       )
                   ),
-
                 )
               ],
             ),
 
-          /* Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(top: 40),
-                  child: Center(
-                      child: Text(
-                        timeLeftText,
-                        style: TextStyle(
-                          fontSize: 70,
-                          fontWeight: FontWeight.bold,
-                          color: MyApp.secondary_color,
-                        ),
-                      )
-                  ),
-                )
-              ],
-            ),*/
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: new AnimatedCircularChart(
+                key: _chartKey,
+                size: _chartSize,
+                initialChartData: _generateChartData(time),
+                chartType: CircularChartType.Radial,
+                edgeStyle: SegmentEdgeStyle.round,
+                percentageValues: true,
+                holeLabel: timeLeftText ,
+                labelStyle: TextStyle(color: MyApp.secondary_color, fontSize: 30),
+              ),
+            ),
 
 
             Row(
@@ -315,7 +265,7 @@ class _TimerPageState extends State<TimerPage>{
                 Container(
                     height: 70,
                     width: 70,
-                    margin: EdgeInsets.only(top: 70),
+                    margin: EdgeInsets.only(top: 50),
                     child: FlatButton(
                       child: Image.asset(started ? 'assets/pause.png' : 'assets/play.png'),
                       onPressed: started ? pause : start,
@@ -324,7 +274,7 @@ class _TimerPageState extends State<TimerPage>{
                 Container(
                     height: 70,
                     width: 70,
-                    margin: EdgeInsets.only(top: 70),
+                    margin: EdgeInsets.only(top: 50),
                     child: FlatButton(
                       child: Image.asset('assets/stop.png'),
                       onPressed: stop,
