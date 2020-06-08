@@ -11,29 +11,31 @@ class Stats extends StatefulWidget {
 
 class _StatsState extends State<Stats> {
 
-  List<double> values = [1,2,4,1,5,6,9];
+  List<double> values = [];
 
   Future populateChart() async
   {
-    DocumentReference documentReference = Firestore.instance.collection('MonthlyActivity').document();
-
     await Firestore.instance.collection('MonthlyActivity').getDocuments().then( (docs) {
       if(docs.documents.isNotEmpty)
       {
         for(int i = 0; i < docs.documents.length; i++)
         {
-          print('-----------------------------');
-          print((docs.documents[i].data['Value'].toDouble()).toString());
           values.add(docs.documents[i].data['Value'].toDouble());
         }
       }
     });
   }
 
+  void addValues()
+  {
+    values = [10, 4, 3, 6, 4, 9, 2];
+  }
+
   @override
   void initState()
   {
     super.initState();
+    addValues();
     populateChart();
     print(values);
   }

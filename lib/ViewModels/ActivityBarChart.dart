@@ -23,8 +23,8 @@ class ActivityBarChart extends StatelessWidget {
             padding: EdgeInsets.all(10.0),
             alignment: Alignment.centerLeft,
             child: Text(
-              'Monthly activity',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              'Monthly activity (entries per month)',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -70,7 +70,7 @@ class ActivityBarChart extends StatelessWidget {
                       textStyle: TextStyle(color: Colors.blueGrey, fontSize: 14.0, fontWeight: FontWeight.bold),
                       getTitles: (value) {
                         if(value == 0) return '0';
-                        else if (value % 3 == 0) return '${value ~/ 3 * 10}';
+                        else if (value % 3 == 0) return '${value ~/ 3 * 5}';
                         return '';
                       }
                     ),
