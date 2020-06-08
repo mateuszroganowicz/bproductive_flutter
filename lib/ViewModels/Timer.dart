@@ -180,10 +180,10 @@ class _TimerPageState extends State<TimerPage>{
   }
 
   void stop(){
-    if(started){
       setState(() {
         stopTimer = true;
         _timer.cancel();
+        timeToBreak = true;
         started = false;
         time = studyTime;
         timeLeftText = "";
@@ -191,7 +191,7 @@ class _TimerPageState extends State<TimerPage>{
         session = 0;
         //debugPrint("Timerstopped");
       });
-    }
+
 
   }
 
