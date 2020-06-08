@@ -1,10 +1,54 @@
+import 'dart:collection';
+
 import 'package:bproductiveflutter/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class MoodPage extends StatelessWidget{
+
+class MoodPage extends StatefulWidget {
+  @override
+  _MoodPageState createState() => _MoodPageState();
+}
+
+class _MoodPageState extends State<MoodPage> {
+
+  Map<String, int> moodCounters = {
+    'Happy': 0,
+    'Sad': 0,
+    'Stressed': 0,
+    'Normal': 0,
+    'Angry': 0,
+    'Confident': 0,
+  };
+
+  void updateMostCommonMood(Map <String, int> counters)
+  {
+    Firestore.instance.collection('Stats').getDocuments().then( (docs) {
+      if(docs.documents.isNotEmpty)
+      {
+        var sortedKeys = counters.keys.toList(growable:false)..sort((k1, k2) => counters[k1].compareTo(counters[k2]));
+        LinkedHashMap sortedMap = new LinkedHashMap.fromIterable(sortedKeys, key: (k) => k, value: (k) => counters[k]);
+
+        print(sortedMap);
+        Map<String, dynamic> mapCommonMood = {
+          'MostCommonMood': counters
+        };
+
+        updateData(mapCommonMood); //Update database
+      }
+    });
+  }
+
+  updateData(newValue)
+  {
+    Firestore.instance.collection('Stats').document('yK7VqYKX0frFN8Cn3XZo').updateData(newValue).catchError( (e)
+    {
+      print(e);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -18,9 +62,9 @@ class MoodPage extends StatelessWidget{
                   child: Text(
                     "What is your mood today?",
                     style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: MyApp.secondary_color
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: MyApp.secondary_color
                     ),
                   ),
                 ),
@@ -36,7 +80,7 @@ class MoodPage extends StatelessWidget{
                 height: 100.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(0.0),
-                  onPressed: (){},
+                  onPressed: (){moodCounters['Happy']++; print(moodCounters);},
                   child: Image.asset('assets/001-smile.png'),
                 ),
               ),
@@ -46,7 +90,7 @@ class MoodPage extends StatelessWidget{
                 height: 100.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(0.0),
-                  onPressed: (){},
+                  onPressed: (){moodCounters['Sad']++; print(moodCounters);},
                   child: Image.asset('assets/002-sad.png'),
                 ),
               ),
@@ -56,7 +100,7 @@ class MoodPage extends StatelessWidget{
                 height: 100.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(0.0),
-                  onPressed: (){},
+                  onPressed: (){moodCounters['Stressed']++; print(moodCounters);},
                   child: Image.asset('assets/012-stress.png'),
                 ),
               )
@@ -71,7 +115,7 @@ class MoodPage extends StatelessWidget{
                 height: 100.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(0.0),
-                  onPressed: (){},
+                  onPressed: (){moodCounters['Normal']++; print(moodCounters);},
                   child: Image.asset('assets/015-shock.png'),
                 ),
               ),
@@ -81,7 +125,7 @@ class MoodPage extends StatelessWidget{
                 height: 100.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(0.0),
-                  onPressed: (){},
+                  onPressed: (){moodCounters['Angry']++; print(moodCounters);},
                   child: Image.asset('assets/038-angry.png'),
                 ),
               ),
@@ -91,7 +135,7 @@ class MoodPage extends StatelessWidget{
                 height: 100.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(0.0),
-                  onPressed: (){},
+                  onPressed: (){moodCounters['Confident']++; print(moodCounters);},
                   child: Image.asset('assets/042-cool.png'),
                 ),
               )
