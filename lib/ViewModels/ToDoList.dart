@@ -39,7 +39,7 @@ class _ToDoListPageState extends State<ToDoListPage>
                   itemBuilder: (context, int index) {
                     DocumentSnapshot documentSnapshot = snapshot.data.documents[index];
                     return Dismissible(
-                      background: Container(decoration: BoxDecoration(color: MyApp.taskPriority3_color, borderRadius: BorderRadius.circular(10))),
+                      background: Container(decoration: BoxDecoration(color: MyApp.accent_color, borderRadius: BorderRadius.circular(10))),
                       onDismissed: (direction) { deleteTodo(documentSnapshot["description"]); },
                       key: Key(index.toString()),
                       child: Card(

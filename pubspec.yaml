@@ -20,6 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_circular_chart:
+  fl_chart: ^0.10.0
 
   #Maps
   geolocation: ^1.1.2

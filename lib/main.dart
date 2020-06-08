@@ -16,15 +16,12 @@ void main() {
 
 class MyApp extends StatefulWidget
 {
-  static const main_color = Color(0xFFF7DB4F);
-  static const main_color_2 = Color(0xFFFFD300);
-  static const main_color_accent = Color(0xFFefc90b);
+  static const main_color = Color(0xFFFFD300);
+  static const main_color_secondary = Color(0xFFffa500);
   static const secondary_color = Color(0xFF2F9599);
   static const accent_color = Color(0xFFEC2049);
+  static const green = Color(0xFF00c05f);
 
-  static const taskPriority1_color = Color(0xFF00c05f);
-  static const taskPriority2_color = Color(0xFFffa500);
-  static const taskPriority3_color = Color(0xFFEC2049);
 
   @override
   State<StatefulWidget> createState()
@@ -72,7 +69,7 @@ class HomePage extends State<MyApp> {
           type: BottomNavigationBarType.fixed,
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
-            backgroundColor: MyApp.main_color_2,
+            backgroundColor: MyApp.main_color,
             items: [
               BottomNavigationBarItem(
                   icon: Icon(Icons.access_time), title: Text("Timer")
