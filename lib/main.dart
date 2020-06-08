@@ -5,7 +5,7 @@ import 'ViewModels/Mood.dart';
 import 'ViewModels/Timer.dart';
 import 'ViewModels/Music.dart';
 import 'ViewModels/ToDoList.dart';
-import 'ViewModels/About.dart';
+import 'Views/About.dart';
 import 'ViewModels/Stats.dart';
 import 'ViewModels/Map.dart';
 

@@ -1,4 +1,5 @@
 import 'package:bproductiveflutter/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class StatsGrid extends StatefulWidget {
@@ -10,30 +11,33 @@ class _StatsGridState extends State<StatsGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top:10),
-      height: MediaQuery.of(context).size.height * 0.3,
-      width: MediaQuery.of(context).size.width*0.95,
-      child: Column(
-        children: <Widget>[
-          Flexible(
-            child: Row(
-              children: <Widget>[
-                statCard('Completed Todos', 'data', MyApp.secondary_color),
-                statCard('Hours spent learning', 'data', MyApp.secondary_color),
-              ],
-            ),
+    return StreamBuilder(
+      stream:  Firestore.instance.collection('Stats').snapshots(),
+      builder: (context, snapshot)
+      {
+        if(!snapshot.hasData) return Center(child: CircularProgressIndicator());
+        return Container(
+          margin: EdgeInsets.only(top:10),
+          height: MediaQuery.of(context).size.height * 0.3,
+          width: MediaQuery.of(context).size.width*0.95,
+          child: Column(
+            children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    statCard('Completed Todos', snapshot.data.documents[0]['CompletedTodos'].toString(), MyApp.secondary_color),
+                    statCard('Hours spent learning', snapshot.data.documents[0]['HoursSpentLearning'].toString(), MyApp.secondary_color),
+                  ],
+                ),
+              Row(
+                  children: <Widget>[
+                    statCard('Most common mood', snapshot.data.documents[0]['MostCommonMood'], MyApp.main_color_secondary),
+                    statCard('Taken sessions', snapshot.data.documents[0]['TakenSessions'].toString(), MyApp.main_color_secondary),
+                  ],
+              )
+            ],
           ),
-          Flexible(
-            child: Row(
-              children: <Widget>[
-                statCard('Most common mood', 'data', MyApp.main_color_secondary),
-                statCard('Taken sessions', 'data', MyApp.main_color_secondary),
-              ],
-            ),
-          )
-        ],
-      ),
+        );
+      }
     );
   }
 }
