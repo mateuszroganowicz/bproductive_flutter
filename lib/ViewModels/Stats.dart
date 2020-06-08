@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
 import 'ActivityBarChart.dart';
 import 'StatsGrid.dart';
 
@@ -12,7 +11,32 @@ class Stats extends StatefulWidget {
 
 class _StatsState extends State<Stats> {
 
-  List<double> values = [6.0, 4.0, 8.0, 7.0, 7.0, 9.0, 4.0];
+  List<double> values = [1,2,4,1,5,6,9];
+
+  Future populateChart() async
+  {
+    DocumentReference documentReference = Firestore.instance.collection('MonthlyActivity').document();
+
+    await Firestore.instance.collection('MonthlyActivity').getDocuments().then( (docs) {
+      if(docs.documents.isNotEmpty)
+      {
+        for(int i = 0; i < docs.documents.length; i++)
+        {
+          print('-----------------------------');
+          print((docs.documents[i].data['Value'].toDouble()).toString());
+          values.add(docs.documents[i].data['Value'].toDouble());
+        }
+      }
+    });
+  }
+
+  @override
+  void initState()
+  {
+    super.initState();
+    populateChart();
+    print(values);
+  }
 
   @override
   Widget build(BuildContext context) {

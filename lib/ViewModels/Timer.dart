@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
@@ -8,18 +9,16 @@ import '../main.dart';
 class TimerPage extends StatefulWidget{
   @override
   _TimerPageState createState() {
-
     return _TimerPageState();
   }
-
 }
 
 class _TimerPageState extends State<TimerPage>{
   int initTime;
   bool started = false;
-  int time = 15;
-  int studyTime = 15;
-  int breakTime = 7;
+  int time = 5;
+  int studyTime = 5;
+  int breakTime = 1;
   String timeLeftText = "00:00";
   String txt = "";
   String txtTop = "Completed sessions:";
@@ -28,8 +27,8 @@ class _TimerPageState extends State<TimerPage>{
   int timeLeft;
   int session = 0;
   int breaks = 0;
-  int totalSessionsStats = 0;
-  int totalTimeStats = 0;
+  int totalSessionsStats;
+  double totalTimeStats;
   Timer _timer;
 
   final GlobalKey<AnimatedCircularChartState> _chartKey = new GlobalKey<AnimatedCircularChartState>();
@@ -48,6 +47,50 @@ class _TimerPageState extends State<TimerPage>{
     return data;
   }
 
+  void updateTotalSessions(int value)
+  {
+    Firestore.instance.collection('Stats').getDocuments().then( (docs) {
+      if(docs.documents.isNotEmpty)
+      {
+        value = docs.documents[0].data['TakenSessions'];  //Load
+        value++;                                          //Modify
+        print('Taken Sessions : ' + value.toString());
+
+        Map<String, dynamic> mapTakenSessions = {
+          'TakenSessions': value
+        };
+
+        updateData(mapTakenSessions); //Update database
+      }
+    });
+  }
+
+  void updateTotalTime(double value)
+  {
+    Firestore.instance.collection('Stats').getDocuments().then( (docs) {
+      if(docs.documents.isNotEmpty)
+      {
+        value = docs.documents[0].data['HoursSpentLearning'].toDouble();  //Load
+        value += 0.25;                                         //Modify (15 min - studyTime)
+        print('Hours spent : ' + value.toString());
+
+        Map<String, dynamic> mapTotalTime = {
+          'HoursSpentLearning': value
+        };
+
+        updateData(mapTotalTime); //Update database
+      }
+    });
+  }
+
+  updateData(newValue)
+  {
+    Firestore.instance.collection('Stats').document('yK7VqYKX0frFN8Cn3XZo').updateData(newValue).catchError( (e)
+    {
+      print(e);
+    });
+  }
+
 
   void start(){
     setState(() {
@@ -61,17 +104,17 @@ class _TimerPageState extends State<TimerPage>{
             timeToBreak = false;
             timeLeftText = "";
             time = breakTime;
-            totalTimeStats += studyTime;
+            updateTotalTime(totalTimeStats);
             session++;
             breaks++;
-            debugPrint(breaks.toString()+ "break Time");
-            debugPrint(totalTimeStats.toString() + "total time");
+            //debugPrint(breaks.toString()+ "break Time");
+            //debugPrint(totalTimeStats.toString() + "total time");
             txt = "Take a short break!";
           }
           else if(time < 1 && session < 4 && !timeToBreak){
             timeToBreak = true;
             time = studyTime;
-            debugPrint(session.toString()+ "study Time");
+            //debugPrint(session.toString()+ "study Time");
 
             txt = "Study hard!";
           }
@@ -79,7 +122,7 @@ class _TimerPageState extends State<TimerPage>{
             session = 0;
             breaks = 0;
             timeToBreak = true;
-            totalSessionsStats++;
+            updateTotalSessions(totalSessionsStats);
             _timer.cancel();
             stopTimer = true;
             timeLeftText = "";
@@ -122,7 +165,7 @@ class _TimerPageState extends State<TimerPage>{
     setState(() {
       started = false;
       _timer.cancel();
-      debugPrint("pause" + time.toString());
+      //debugPrint("pause" + time.toString());
     });
   }
 
@@ -136,7 +179,7 @@ class _TimerPageState extends State<TimerPage>{
         timeLeftText = "";
         breaks = 0;
         session = 0;
-        debugPrint("Timerstopped");
+        //debugPrint("Timerstopped");
       });
     }
 
@@ -154,19 +197,6 @@ class _TimerPageState extends State<TimerPage>{
       (
         body: Column(
           children: <Widget>[
-            Container(
-              child: new AnimatedCircularChart(
-                key: _chartKey,
-                size: _chartSize,
-                initialChartData: _generateChartData(0,0),
-                chartType: CircularChartType.Radial,
-                edgeStyle: SegmentEdgeStyle.round,
-                percentageValues: true,
-                holeLabel: txt,
-                labelStyle: _labelStyle,
-
-              ),
-            ),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

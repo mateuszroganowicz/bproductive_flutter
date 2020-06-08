@@ -16,11 +16,34 @@ class _ToDoListPageState extends State<ToDoListPage>
   String description = "";
   String localisation = "";
   int priority = 1;
+  int completedTodos;
 
   deleteTodo(item)
   {
     DocumentReference documentReference = Firestore.instance.collection("Todos").document(item);
     documentReference.delete().whenComplete( () {print("$item deleted");});
+
+    Firestore.instance.collection('Stats').getDocuments().then( (docs) {
+      if(docs.documents.isNotEmpty)
+      {
+        completedTodos = docs.documents[0].data['CompletedTodos'];
+        completedTodos++;
+
+        Map<String, dynamic> mapCompletedTodos = {
+          'CompletedTodos': completedTodos
+        };
+
+        updateData(mapCompletedTodos);
+      }
+    });
+  }
+
+  updateData(newValue)
+  {
+    Firestore.instance.collection('Stats').document('yK7VqYKX0frFN8Cn3XZo').updateData(newValue).catchError( (e)
+    {
+      print(e);
+    });
   }
 
   @override
